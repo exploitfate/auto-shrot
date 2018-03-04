@@ -15,18 +15,31 @@ return [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
-    'controllerMap' => [
-        'fixture' => [
-            'class' => 'yii\console\controllers\FixtureController',
-            'namespace' => 'common\fixtures',
-          ],
-    ],
     'components' => [
         'log' => [
+            'flushInterval' => 1,
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'exportInterval' => 1,
+                    'levels' => [
+                        'error',
+                        'warning',
+                        //'info',
+                        //'trace',
+                    ],
+                ],
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'exportInterval' => 1,
+                    'levels' => [
+                        'error',
+                        'warning',
+                        //'info',
+                        //'trace',
+                    ],
+                    'logVars' => [],
+                    'logFile' => '@app/runtime/logs/pretty/app.log',
                 ],
             ],
         ],
