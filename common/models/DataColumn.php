@@ -3,6 +3,7 @@
 namespace common\models;
 
 use yii\base\Model;
+use yii\grid\DataColumn as BaseDataColumn;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
@@ -10,7 +11,7 @@ use yii\helpers\Html;
  * Class DataColumn
  * @package common\models
  */
-class DataColumn extends \yii\grid\DataColumn
+class DataColumn extends BaseDataColumn
 {
     public $filterPretty = true;
 
