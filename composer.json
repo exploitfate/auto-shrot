@@ -14,7 +14,8 @@
     },
     "minimum-stability": "stable",
     "require": {
-        "php": ">=5.4.0",
+        "ext-mbstring": "*",
+        "php": ">=7.2.0",
         "yiisoft/yii2": "2.0.29",
         "yiisoft/yii2-swiftmailer": "2.1.2",
         "bower-asset/toastr": "2.1.1",

@@ -20,13 +20,11 @@ use yii\web\IdentityInterface;
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
+ * @property string $authKey authKey
  * @property string $password write-only password
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-    const STATUS_ACTIVE = 10;
-
-
     /**
      * {@inheritdoc}
      */
@@ -41,7 +39,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            'timestamp' => TimestampBehavior::class,
         ];
     }
 
@@ -61,7 +59,10 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'status' => ActiveStatusHelper::STATUS_ACTIVE]);
+        return static::find()
+            ->andWhere(['id' => $id, 'status' => ActiveStatusHelper::STATUS_ACTIVE])
+            ->limit(1)
+            ->one();
     }
 
     /**
@@ -80,7 +81,10 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findByUsername($username)
     {
-        return static::findOne(['username' => $username, 'status' => ActiveStatusHelper::STATUS_ACTIVE]);
+        return static::find()
+            ->andWhere(['username' => $username, 'status' => ActiveStatusHelper::STATUS_ACTIVE])
+            ->limit(1)
+            ->one();
     }
 
     /**
@@ -95,10 +99,10 @@ class User extends ActiveRecord implements IdentityInterface
             return null;
         }
 
-        return static::findOne([
-            'password_reset_token' => $token,
-            'status' => ActiveStatusHelper::STATUS_ACTIVE,
-        ]);
+        return static::find()
+            ->andWhere(['password_reset_token' => $token, 'status' => ActiveStatusHelper::STATUS_ACTIVE,])
+            ->limit(1)
+            ->one();
     }
 
     /**

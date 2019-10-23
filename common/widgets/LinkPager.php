@@ -14,7 +14,7 @@ use yii\web\Request;
  *
  * For activate page size need set \yii\data\Pagination::pageSizeLimit in config like this
  *
- * \Yii::$container->set(\yii\data\Pagination::className(), [
+ * \Yii::$container->set(\yii\data\Pagination::class, [
  *     'pageSizeLimit' => [1, 1000],
  * ]);
  *
